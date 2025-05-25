@@ -1,1 +1,8 @@
-<p>proyecto works!</p>
+<!-- proyecto.component.html -->
+<div *ngFor="let proyecto of proyectos">
+  <strong>{{ proyecto.nombre_proyecto }}</strong> - {{ proyecto.descripcion }}<br>
+  Entrega: {{ proyecto.fecha_entrega | date:'longDate' }}<br>
+  Estado: {{ proyecto.id_estado }}<br>
+  <em>{{ estadoProyecto(proyecto) }} (faltan {{ proyecto.diasRestantes() }} días)</em>
+  <hr>
+</div>
