@@ -1,1 +1,56 @@
-<p>equipos works!</p>
+<div class="container">
+  <h1>Gestión de Equipos</h1>
+
+  <div class="formulario">
+    <h2>Crear Nuevo Equipo</h2>
+    <input [(ngModel)]="nuevoEquipo.codigo_equipo" placeholder="Código del equipo">
+    <input [(ngModel)]="nuevoEquipo.nombre_equipo" placeholder="Nombre del equipo">
+    <input [(ngModel)]="nuevoEquipo.descripcion" placeholder="Descripción">
+    <input [(ngModel)]="nuevoEquipo.numero_control" placeholder="Número de control (líder)">
+    <button (click)="agregarEquipo()">Agregar</button>
+  </div>
+
+  <p *ngIf="mensaje" [ngClass]="tipoMensaje">{{ mensaje }}</p>
+
+  <table class="teams-table" *ngIf="equipos.length > 0; else sinEquipos">
+    <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Líder</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipo of equipos">
+        <td>{{ equipo.codigo_equipo }}</td>
+        <td>{{ equipo.nombre_equipo }}</td>
+        <td>{{ equipo.descripcion }}</td>
+        <td>{{ equipo.numero_control }}</td>
+        <td>
+          <button (click)="editarEquipo(equipo)">Editar</button>
+          <button (click)="eliminarEquipo(equipo.codigo_equipo)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #sinEquipos>
+    <p>No hay equipos registrados.</p>
+  </ng-template>
+
+  <!-- Modal de edición -->
+  <div class="modal-overlay" *ngIf="equipoEditado">
+    <div class="modal">
+      <h2>Editar Equipo</h2>
+      <input [(ngModel)]="equipoEditado.nombre_equipo" placeholder="Nombre del equipo">
+      <input [(ngModel)]="equipoEditado.descripcion" placeholder="Descripción">
+      <input [(ngModel)]="equipoEditado.numero_control" placeholder="Número de control (líder)">
+      <div class="modal-buttons">
+        <button (click)="guardarEdicion()">Guardar</button>
+        <button (click)="cancelarEdicion()">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
