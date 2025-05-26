@@ -2,7 +2,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // ✅ Necesario para ngModel
-import { EquipoService } from '../../services/equipo.service';
+import { ApiService } from '../../services/api.service';
 import { Equipo } from '../../models/equipo.model';
 
 @Component({
@@ -21,20 +21,20 @@ export class EquiposComponent {
 
   equipoEditado: Equipo | null = null;
 
-  constructor(private equipoService: EquipoService) {}
+  constructor(private apiService: ApiService) {}
 
   ngOnInit() {
     this.obtenerEquipos();
   }
 
   obtenerEquipos() {
-    this.equipoService.getEquipos().subscribe((data: Equipo[]) => {
+    this.apiService.getEquipos().subscribe((data: Equipo[]) => {
       this.equipos = data;
     });
   }
 
   agregarEquipo() {
-    this.equipoService.agregarEquipo(this.nuevoEquipo).subscribe(() => {
+    this.apiService.agregarEquipo(this.nuevoEquipo).subscribe(() => {
       this.obtenerEquipos();
       this.nuevoEquipo = new Equipo('', '', '', '');
       this.mensaje = 'Equipo agregado correctamente';
@@ -56,7 +56,7 @@ export class EquiposComponent {
 
   guardarEdicion() {
     if (this.equipoEditado) {
-      this.equipoService.actualizarEquipo(this.equipoEditado).subscribe(() => {
+      this.apiService.actualizarEquipo(this.equipoEditado).subscribe(() => {
         this.obtenerEquipos();
         this.mensaje = 'Equipo actualizado correctamente';
         this.tipoMensaje = 'exito';
@@ -73,7 +73,7 @@ export class EquiposComponent {
   }
 
   eliminarEquipo(codigo_equipo: string) {
-    this.equipoService.eliminarEquipo(codigo_equipo).subscribe(() => {
+    this.apiService.eliminarEquipo(codigo_equipo).subscribe(() => {
       this.obtenerEquipos();
       this.mensaje = 'Equipo eliminado correctamente';
       this.tipoMensaje = 'exito';

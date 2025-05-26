@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Proyecto } from '../models/proyecto.model';
 import { Observable } from 'rxjs';
+import { Equipo } from '../models/equipo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +36,23 @@ export class ApiService {
     });
   }
   
+  obtenerEquipos(): Observable<Equipo[]> {
+      return this.httpClient.get<Equipo[]>(`${this.PHP_API_SERVER}/teams-table.php`);
+    }
+    getEquipos(): Observable<Equipo[]> {
+    return this.httpClient.get<Equipo[]>(`${this.PHP_API_SERVER}/equipo.php`);
+  }
+  
+  
+    agregarEquipo(equipo: Equipo): Observable<any> {
+      return this.httpClient.post(`${this.PHP_API_SERVER}/teams-table-insert.php`, equipo);
+    }
+  
+    eliminarEquipo(codigo: string): Observable<any> {
+      return this.httpClient.delete(`${this.PHP_API_SERVER}/teams-table-delete.php?codigo_equipo=${codigo}`);
+    }
+  
+    actualizarEquipo(equipo: Equipo): Observable<any> {
+      return this.httpClient.post(`${this.PHP_API_SERVER}/teams-table-update.php`, equipo);
+    }
 }
