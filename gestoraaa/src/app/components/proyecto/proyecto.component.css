@@ -1,0 +1,16 @@
+.dark {
+  background-color: #222;
+  color: white;
+}
+.toggle-theme {
+  margin-bottom: 1rem;
+}
+.cancel {
+  background-color: orange;
+}
+.mensaje.success {
+  color: green;
+}
+.mensaje.error {
+  color: red;
+}

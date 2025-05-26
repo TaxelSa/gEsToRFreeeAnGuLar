@@ -1,8 +1,55 @@
-<!-- proyecto.component.html -->
-<div *ngFor="let proyecto of proyectos">
-  <strong>{{ proyecto.nombre_proyecto }}</strong> - {{ proyecto.descripcion }}<br>
-  Entrega: {{ proyecto.fecha_entrega | date:'longDate' }}<br>
-  Estado: {{ proyecto.id_estado }}<br>
-  <em>{{ estadoProyecto(proyecto) }} (faltan {{ proyecto.diasRestantes() }} días)</em>
-  <hr>
+<div class="container" [ngClass]="{'dark': darkMode}">
+  <h1>Gestión de Proyectos</h1>
+  <button (click)="toggleDarkMode()" class="toggle-theme">
+    Cambiar a {{ darkMode ? 'modo claro' : 'modo oscuro' }}
+  </button>
+
+  <div class="formulario">
+    <h2>{{ editando ? "Editar Proyecto" : "Crear Nuevo Proyecto" }}</h2>
+    <form (ngSubmit)="guardarProyecto()">
+      <input name="id_proyecto" [(ngModel)]="form.id_proyecto" placeholder="ID del Proyecto" [disabled]="editando" required />
+      <input name="nombre_proyecto" [(ngModel)]="form.nombre_proyecto" placeholder="Nombre del Proyecto" required />
+      <input name="descripcion" [(ngModel)]="form.descripcion" placeholder="Descripción" required />
+      <input name="fecha_entrega" [(ngModel)]="form.fecha_entrega" type="date" required />
+      <input name="id_usuario" [(ngModel)]="form.id_usuario" placeholder="ID Usuario" />
+      <input name="id_estado" [(ngModel)]="form.id_estado" placeholder="ID Estado" />
+      <input name="id_materia" [(ngModel)]="form.id_materia" placeholder="ID Materia" />
+      <input name="id_equipo" [(ngModel)]="form.id_equipo" placeholder="ID Equipo" />
+      <button type="submit">{{ editando ? "Actualizar Proyecto" : "Agregar Proyecto" }}</button>
+      <button type="button" *ngIf="editando" (click)="limpiarFormulario()" class="cancel">Cancelar</button>
+    </form>
+  </div>
+
+  <p *ngIf="mensaje" [ngClass]="mensajeTipo">{{ mensaje }}</p>
+
+  <h2>Proyectos Registrados</h2>
+  <table class="projects-table" *ngIf="proyectos.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+        <th>Estudiante</th>
+        <th>Operaciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proy of proyectos">
+        <td>{{ proy.id_proyecto }}</td>
+        <td>{{ proy.nombre_proyecto }}</td>
+        <td>{{ proy.descripcion }}</td>
+        <td>{{ proy.fecha_entrega }}</td>
+        <td>{{ proy.id_estado }}</td>
+        <td>{{ proy.id_usuario }}</td>
+        <td>
+          <button (click)="editarProyecto(proy)">Modificar</button>
+          <button (click)="eliminarProyecto(proy.id_proyecto)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="proyectos.length === 0">No hay proyectos registrados.</p>
 </div>

@@ -1,4 +1,3 @@
-// src/app/models/proyecto.model.ts
 export class Proyecto {
   id_proyecto: string = '';
   nombre_proyecto: string = '';
@@ -8,4 +7,4 @@ export class Proyecto {
   id_estado: string = '';
   id_materia: string = '';
   id_equipo: string = '';
-} 
+}

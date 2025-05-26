@@ -9,26 +9,30 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  PHP_API_SERVER = "http://127.0.0.1:80";
+  PHP_API_SERVER = "http://127.0.0.1:80/gEsToRFreeeAnGuLar/gestoraaa/php";
 
   constructor(private httpClient: HttpClient) {}
 
   // --- CRUD de USUARIOS ---
 
   // --- CRUD de PROYECTOS ---
-  readProyecto(): Observable<Proyecto[]> {
-    return this.httpClient.get<Proyecto[]>(`${this.PHP_API_SERVER}/gEsToRFreeeAnGuLar/gestoraaa/php/teams-table-proyectos.php`);
+
+  obtenerProyectos(): Observable<Proyecto[]> {
+    return this.httpClient.get<Proyecto[]>(`${this.PHP_API_SERVER}/teams-table-proyectos.php`);
   }
 
-  createProyecto(proyecto: Proyecto): Observable<Proyecto> {
-    return this.httpClient.post<Proyecto>(`${this.PHP_API_SERVER}/gEsToRFreeeAnGuLar/gestoraaa/php/teams-table-insert-proyectos.php`, proyecto);
+  crearProyecto(proyecto: Proyecto): Observable<any> {
+    return this.httpClient.post(`${this.PHP_API_SERVER}/teams-table-insert-proyectos.php`, proyecto);
   }
 
-  updateProyecto(proyecto: Proyecto): Observable<Proyecto> {
-    return this.httpClient.put<Proyecto>(`${this.PHP_API_SERVER}/gEsToRFreeeAnGuLar/gestoraaa/php/teams-table-update-proyectos.php`, proyecto);
+  actualizarProyecto(proyecto: Proyecto): Observable<any> {
+    return this.httpClient.put(`${this.PHP_API_SERVER}/teams-table-update-proyecto.php`, proyecto);
   }
 
-  deleteProyecto(id: number): Observable<Proyecto> {
-    return this.httpClient.delete<Proyecto>(`${this.PHP_API_SERVER}/gEsToRFreeeAnGuLar/gestoraaa/php/teams-table-delete-proyectos.php/?id=${id}`);
+  eliminarProyecto(id_proyecto: string): Observable<any> {
+    return this.httpClient.request('delete', `${this.PHP_API_SERVER}/teams-table-delete-proyecto.php`, {
+      body: { id_proyecto }
+    });
   }
+  
 }
