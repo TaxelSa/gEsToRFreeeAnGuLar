@@ -1,1 +1,32 @@
-<p>tareas works!</p>
+<div class="tareas-container">
+  <h2>Lista de Tareas</h2>
+  
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading">
+    <p>Cargando tareas...</p>
+  </div>
+  
+  <!-- Error State -->
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="cargarTareas()">Reintentar</button>
+  </div>
+  
+  <!-- Success State -->
+  <div *ngIf="!isLoading && !error">
+    <div *ngIf="todasLasTareas.length === 0" class="no-tareas">
+      No hay tareas para mostrar.
+    </div>
+    
+    <div *ngIf="todasLasTareas.length > 0" class="lista">
+      <div class="tarea" *ngFor="let tarea of todasLasTareas; trackBy: trackByTarea">
+        <div class="tarea-contenido">
+          <span class="tarea-nombre">{{ tarea.nombre_tarea }}</span>
+          <span class="tarea-estado" [class]="'estado-' + (tarea.estado || 'sin-estado')">
+            {{ tarea.estado || 'sin estado' }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
