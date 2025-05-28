@@ -1,32 +1,32 @@
-<div class="tareas-container">
-  <h2>Lista de Tareas</h2>
-  
-  <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading">
-    <p>Cargando tareas...</p>
+<h2>Tareas Pendientes</h2>
+<div
+  cdkDropList
+  [cdkDropListData]="tareasPendientes"
+  (cdkDropListDropped)="drop($event, 'pendiente')"
+  class="lista">
+  <div class="tarea" *ngFor="let tarea of tareasPendientes" cdkDrag>
+    {{ tarea.nombre_tarea }}
   </div>
-  
-  <!-- Error State -->
-  <div *ngIf="error" class="error">
-    <p>{{ error }}</p>
-    <button (click)="cargarTareas()">Reintentar</button>
+</div>
+
+<h2>En Progreso</h2>
+<div
+  cdkDropList
+  [cdkDropListData]="tareasEnProgreso"
+  (cdkDropListDropped)="drop($event, 'en_progreso')"
+  class="lista">
+  <div class="tarea" *ngFor="let tarea of tareasEnProgreso" cdkDrag>
+    {{ tarea.nombre_tarea }}
   </div>
-  
-  <!-- Success State -->
-  <div *ngIf="!isLoading && !error">
-    <div *ngIf="todasLasTareas.length === 0" class="no-tareas">
-      No hay tareas para mostrar.
-    </div>
-    
-    <div *ngIf="todasLasTareas.length > 0" class="lista">
-      <div class="tarea" *ngFor="let tarea of todasLasTareas; trackBy: trackByTarea">
-        <div class="tarea-contenido">
-          <span class="tarea-nombre">{{ tarea.nombre_tarea }}</span>
-          <span class="tarea-estado" [class]="'estado-' + (tarea.estado || 'sin-estado')">
-            {{ tarea.estado || 'sin estado' }}
-          </span>
-        </div>
-      </div>
-    </div>
+</div>
+
+<h2>Terminadas</h2>
+<div
+  cdkDropList
+  [cdkDropListData]="tareasTerminadas"
+  (cdkDropListDropped)="drop($event, 'terminada')"
+  class="lista">
+  <div class="tarea" *ngFor="let tarea of tareasTerminadas" cdkDrag>
+    {{ tarea.nombre_tarea }}
   </div>
 </div>
