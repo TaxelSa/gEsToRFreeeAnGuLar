@@ -28,7 +28,7 @@ export class EquiposComponent {
   }
 
   obtenerEquipos() {
-    this.apiService.getEquipos().subscribe((data: Equipo[]) => {
+    this.apiService.obtenerEquipos().subscribe((data: Equipo[]) => {
       this.equipos = data;
     });
   }

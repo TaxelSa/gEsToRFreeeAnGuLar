@@ -42,7 +42,8 @@ export class ApiService {
   obtenerEquipos(): Observable<Equipo[]> {
       return this.httpClient.get<Equipo[]>(`${this.PHP_API_SERVER}/teams-table.php`);
     }
-    getEquipos(): Observable<Equipo[]> {
+
+  getEquipos(): Observable<Equipo[]> {
     return this.httpClient.get<Equipo[]>(`${this.PHP_API_SERVER}/equipo.php`);
   }
 
