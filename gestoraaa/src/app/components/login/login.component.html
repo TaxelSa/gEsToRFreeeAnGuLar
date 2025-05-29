@@ -1,0 +1,26 @@
+  <div class="login-wrapper">
+  <div class="container">
+    <img src="assets/ito-logo.jpg" alt="Logo ITO" class="logo" />
+    <h2>Iniciar Sesión</h2>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label for="numero_control">Número de Control:</label>
+      <input
+        type="text"
+        id="numero_control"
+        formControlName="numero_control"
+      />
+
+      <label for="password">Contraseña:</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+      />
+ 
+      <button type="submit">Iniciar Sesión</button>
+      
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    </form>
+  </div>
+</div>
