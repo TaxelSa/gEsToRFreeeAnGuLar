@@ -1,32 +1,49 @@
-<div class="tareas-container">
-  <h2>Lista de Tareas</h2>
-  
-  <!-- Loading State -->
-  <div *ngIf="isLoading" class="loading">
-    <p>Cargando tareas...</p>
-  </div>
-  
-  <!-- Error State -->
-  <div *ngIf="error" class="error">
-    <p>{{ error }}</p>
-    <button (click)="cargarTareas()">Reintentar</button>
-  </div>
-  
-  <!-- Success State -->
-  <div *ngIf="!isLoading && !error">
-    <div *ngIf="todasLasTareas.length === 0" class="no-tareas">
-      No hay tareas para mostrar.
+<div class="contenedor-columnas">
+  <div
+    cdkDropList
+    #col1="cdkDropList"
+    [cdkDropListData]="tareasCol1"
+    [cdkDropListConnectedTo]="[col2, col3]"
+    class="lista"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h2>Columna 1</h2>
+    <div class="tarea" *ngFor="let tarea of tareasCol1" cdkDrag>
+      {{ tarea.nombre_tarea }}
+      <button (click)="editarTarea(tarea)">Modificar</button>
+      <button (click)="eliminarTarea(tarea)">Eliminar</button>
     </div>
-    
-    <div *ngIf="todasLasTareas.length > 0" class="lista">
-      <div class="tarea" *ngFor="let tarea of todasLasTareas; trackBy: trackByTarea">
-        <div class="tarea-contenido">
-          <span class="tarea-nombre">{{ tarea.nombre_tarea }}</span>
-          <span class="tarea-estado" [class]="'estado-' + (tarea.estado || 'sin-estado')">
-            {{ tarea.estado || 'sin estado' }}
-          </span>
-        </div>
-      </div>
+  </div>
+
+  <div
+    cdkDropList
+    #col2="cdkDropList"
+    [cdkDropListData]="tareasCol2"
+    [cdkDropListConnectedTo]="[col1, col3]"
+    class="lista"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h2>Columna 2</h2>
+    <div class="tarea" *ngFor="let tarea of tareasCol2" cdkDrag>
+      {{ tarea.nombre_tarea }}
+      <button (click)="editarTarea(tarea)">Modificar</button>
+      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+    </div>
+  </div>
+
+  <div
+    cdkDropList
+    #col3="cdkDropList"
+    [cdkDropListData]="tareasCol3"
+    [cdkDropListConnectedTo]="[col1, col2]"
+    class="lista"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h2>Columna 3</h2>
+    <div class="tarea" *ngFor="let tarea of tareasCol3" cdkDrag>
+      {{ tarea.nombre_tarea }}
+      <button (click)="editarTarea(tarea)">Modificar</button>
+      <button (click)="eliminarTarea(tarea)">Eliminar</button>
     </div>
   </div>
 </div>
