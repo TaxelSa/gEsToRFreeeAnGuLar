@@ -3,5 +3,5 @@ export interface Tarea {
   nombre_tarea: string;
   fecha_entrega: string;
   hora_entrega: string;
-  estado: 'pendiente' | 'en_progreso' | 'terminada'; // Asegúrate de que se incluya si lo usas
+  estado: 'pendiente' | 'en_progreso' | 'terminada';
 }
