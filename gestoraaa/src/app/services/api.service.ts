@@ -79,4 +79,14 @@ actualizarTarea(tarea: Tarea): Observable<any> {
 eliminarTarea(id_tarea: number): Observable<any> {
   return this.httpClient.delete(`${this.PHP_API_SERVER}/eliminart.php?id_tarea=${id_tarea}`);
 }
+
+crearTarea(tarea: Tarea): Observable<any> {
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  
+  return this.httpClient.post(
+    `${this.PHP_API_SERVER}/agregar_tarea.php`,
+    JSON.stringify(tarea),
+    { headers }
+  );
+}
 }
