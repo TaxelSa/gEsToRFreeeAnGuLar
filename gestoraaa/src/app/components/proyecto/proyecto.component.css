@@ -1,16 +1,106 @@
-.dark {
-  background-color: #222;
-  color: white;
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  background-color: white;
+  color: #333;
 }
+
+.container.dark {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
 .toggle-theme {
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
+  padding: 8px 15px;
+  background: #343a40;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
-.cancel {
-  background-color: orange;
+
+.toggle-theme:hover {
+  opacity: 0.85;
 }
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+input,
+button {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* Botón cancelar visible solo cuando se edita */
+button.cancel {
+  background: #6c757d;
+}
+
+/* Mensaje de éxito o error */
+.mensaje {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 .mensaje.success {
   color: green;
 }
+
 .mensaje.error {
   color: red;
+}
+
+/* Tabla de proyectos */
+.projects-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.container.dark .projects-table {
+  background: #2a2a2a;
+}
+
+.projects-table th,
+.projects-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.projects-table th {
+  background: #007bff;
+  color: white;
+}
+
+.container.dark .projects-table th {
+  background: #0056b3;
+}
+
+.projects-table tr:hover {
+  background: #f1f1f1;
+}
+
+.container.dark .projects-table tr:hover {
+  background: #3a3a3a;
 }
