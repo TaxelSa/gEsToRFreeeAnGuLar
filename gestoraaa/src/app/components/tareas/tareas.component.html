@@ -1,32 +1,49 @@
-<h2>Tareas Pendientes</h2>
-<div
-  cdkDropList
-  [cdkDropListData]="tareasPendientes"
-  (cdkDropListDropped)="drop($event, 'pendiente')"
-  class="lista">
-  <div class="tarea" *ngFor="let tarea of tareasPendientes" cdkDrag>
-    {{ tarea.nombre_tarea }}
+<div class="contenedor-columnas">
+  <div
+    cdkDropList
+    #col1="cdkDropList"
+    [cdkDropListData]="tareasCol1"
+    [cdkDropListConnectedTo]="[col2, col3]"
+    class="lista"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h2>Columna 1</h2>
+    <div class="tarea" *ngFor="let tarea of tareasCol1" cdkDrag>
+      {{ tarea.nombre_tarea }}
+      <button (click)="editarTarea(tarea)">Modificar</button>
+      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+    </div>
   </div>
-</div>
 
-<h2>En Progreso</h2>
-<div
-  cdkDropList
-  [cdkDropListData]="tareasEnProgreso"
-  (cdkDropListDropped)="drop($event, 'en_progreso')"
-  class="lista">
-  <div class="tarea" *ngFor="let tarea of tareasEnProgreso" cdkDrag>
-    {{ tarea.nombre_tarea }}
+  <div
+    cdkDropList
+    #col2="cdkDropList"
+    [cdkDropListData]="tareasCol2"
+    [cdkDropListConnectedTo]="[col1, col3]"
+    class="lista"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h2>Columna 2</h2>
+    <div class="tarea" *ngFor="let tarea of tareasCol2" cdkDrag>
+      {{ tarea.nombre_tarea }}
+      <button (click)="editarTarea(tarea)">Modificar</button>
+      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+    </div>
   </div>
-</div>
 
-<h2>Terminadas</h2>
-<div
-  cdkDropList
-  [cdkDropListData]="tareasTerminadas"
-  (cdkDropListDropped)="drop($event, 'terminada')"
-  class="lista">
-  <div class="tarea" *ngFor="let tarea of tareasTerminadas" cdkDrag>
-    {{ tarea.nombre_tarea }}
+  <div
+    cdkDropList
+    #col3="cdkDropList"
+    [cdkDropListData]="tareasCol3"
+    [cdkDropListConnectedTo]="[col1, col2]"
+    class="lista"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h2>Columna 3</h2>
+    <div class="tarea" *ngFor="let tarea of tareasCol3" cdkDrag>
+      {{ tarea.nombre_tarea }}
+      <button (click)="editarTarea(tarea)">Modificar</button>
+      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+    </div>
   </div>
 </div>

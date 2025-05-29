@@ -1,22 +1,43 @@
 .lista {
-  min-height: 100px;
-  border: 2px dashed #ccc;
+  border: 1px solid #ccc;
+  min-height: 200px;
+  width: 300px;
+  margin: 10px;
   padding: 10px;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
+  display: inline-block;
+  vertical-align: top;
+  background-color: #f9f9f9;
 }
 
 .tarea {
-  padding: 10px;
-  margin-bottom: 5px;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 8px;
+  margin: 5px 0;
+  background-color: white;
+  border: 1px solid #ddd;
   cursor: move;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  margin-top: 30px;
-  color: #333;
+.contenedor-listas {
+  display: flex;
+  gap: 20px; /* espacio entre columnas */
+  justify-content: flex-start; /* opcional, para que empiecen desde la izquierda */
+  align-items: flex-start; /* alinea por arriba */
+}
+
+.lista {
+  border: 1px solid #ccc;
+  min-height: 200px;
+  width: 300px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  /* Quita margin para evitar apilado vertical */
+  margin: 0;
+}
+
+.tarea {
+  padding: 8px;
+  margin: 5px 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  cursor: move;
 }

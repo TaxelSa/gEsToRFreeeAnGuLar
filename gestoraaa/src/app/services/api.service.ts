@@ -1,7 +1,7 @@
 // src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { map } from 'rxjs/operators';
 import { Proyecto } from '../models/proyecto.model';
 import { Observable } from 'rxjs';
 import { Equipo } from '../models/equipo.model';
@@ -60,11 +60,18 @@ export class ApiService {
       return this.httpClient.post(`${this.PHP_API_SERVER}/teams-table-update.php`, equipo);
     }
 
-     obtenerTareas(): Observable<Tarea[]> {
-    return this.httpClient.get<Tarea[]>(`${this.PHP_API_SERVER}/tareas.php`);
-  }
+ obtenerTareas(): Observable<Tarea[]> {
+  return this.httpClient.get<{ status: string, data: Tarea[] }>(`${this.PHP_API_SERVER}/tareas.php`)
+    .pipe(map((respuesta: { status: string, data: Tarea[] }) => respuesta.data));
+}
 
-  actualizarEstadoTarea(id_tarea: number, estado: string): Observable<any> {
-    return this.httpClient.post(`${this.PHP_API_SERVER}/modificar_tarea.php`, { id_tarea, estado });
-  }
+
+actualizarTarea(tarea: Tarea): Observable<any> {
+  // Si usas POST para actualizar, como en actualizarEstadoTarea, o PUT si tu backend lo soporta
+  return this.httpClient.post(`${this.PHP_API_SERVER}/modificar_tarea.php`, tarea);
+}
+
+eliminarTarea(id_tarea: number): Observable<any> {
+  return this.httpClient.delete(`${this.PHP_API_SERVER}/eliminart.php?id_tarea=${id_tarea}`);
+}
 }
