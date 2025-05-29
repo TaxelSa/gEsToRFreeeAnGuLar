@@ -25,3 +25,17 @@
 .sidebar a.active {
   color: #1976d2;
 }
+
+.logout-button {
+  margin-top: 2rem;
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.logout-button:hover {
+  background-color: #d32f2f;
+}

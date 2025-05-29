@@ -6,6 +6,7 @@ import { Proyecto } from '../models/proyecto.model';
 import { Observable } from 'rxjs';
 import { Equipo } from '../models/equipo.model';
 import { Tarea } from '../models/tarea.model';
+import { Login } from '../models/login.model';
 
 
 @Injectable({
@@ -80,6 +81,7 @@ eliminarTarea(id_tarea: number): Observable<any> {
   return this.httpClient.delete(`${this.PHP_API_SERVER}/eliminart.php?id_tarea=${id_tarea}`);
 }
 
+<<<<<<< HEAD
 crearTarea(tarea: Tarea): Observable<any> {
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
   
@@ -88,5 +90,9 @@ crearTarea(tarea: Tarea): Observable<any> {
     JSON.stringify(tarea),
     { headers }
   );
+=======
+login(datos: Login): Observable<any> {
+  return this.httpClient.post(`${this.PHP_API_SERVER}/login.php`, datos);
+>>>>>>> main
 }
 }
