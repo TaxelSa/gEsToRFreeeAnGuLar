@@ -1,7 +1,9 @@
 <!-- src/app/app.component.html -->
 <div style="display: flex;">
-  <app-sidebar></app-sidebar>
-  <div style="margin-left: 220px; padding: 1rem; flex: 1;">
+  <!-- Oculta el sidebar en la ruta de login -->
+  <app-sidebar *ngIf="!isLoginRoute()"></app-sidebar>
+
+  <div [style.margin-left]="!isLoginRoute() ? '220px' : '0'" style="padding: 1rem; flex: 1;">
     <router-outlet></router-outlet>
   </div>
 </div>
