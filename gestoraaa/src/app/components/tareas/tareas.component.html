@@ -1,4 +1,3 @@
-
 <div class="contenedor-columnas">
   <div
     cdkDropList
@@ -8,7 +7,7 @@
     class="lista"
     (cdkDropListDropped)="drop($event)"
   >
-    <h2>Pendiente</h2>
+    <h2>Columna 1</h2>
     <div class="tarea" *ngFor="let tarea of tareasCol1" cdkDrag>
       <ng-container *ngIf="tareaEnEdicion?.id_tarea !== tarea.id_tarea">
         {{ tarea.nombre_tarea }}
@@ -32,7 +31,7 @@
     class="lista"
     (cdkDropListDropped)="drop($event)"
   >
-    <h2>Por hacer</h2>
+    <h2>Columna 2</h2>
     <div class="tarea" *ngFor="let tarea of tareasCol2" cdkDrag>
       <ng-container *ngIf="tareaEnEdicion?.id_tarea !== tarea.id_tarea">
         {{ tarea.nombre_tarea }}
@@ -56,7 +55,7 @@
     class="lista"
     (cdkDropListDropped)="drop($event)"
   >
-    <h2>Terminado</h2>
+    <h2>Columna 3</h2>
     <div class="tarea" *ngFor="let tarea of tareasCol3" cdkDrag>
       <ng-container *ngIf="tareaEnEdicion?.id_tarea !== tarea.id_tarea">
         {{ tarea.nombre_tarea }}
@@ -73,80 +72,4 @@
   </div>
 </div>
 
-
-<!-- Formulario de registro de tareas -->
-<div class="formulario-tarea">
-  <h2>Registrar Nueva Tarea</h2>
-  <form (ngSubmit)="$event.preventDefault(); agregarTarea()" #tareaForm="ngForm">
-    <div class="form-group">
-      <label for="nombre_tarea">Nombre de la tarea:</label>
-      <input
-        type="text"
-        id="nombre_tarea"
-        name="nombre_tarea"
-        [(ngModel)]="nuevaTarea.nombre_tarea"
-        required
-        #nombre="ngModel"
-        [class.is-invalid]="nombre.invalid && (nombre.dirty || nombre.touched)">
-      <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="invalid-feedback">
-        El nombre de la tarea es requerido
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="fecha_entrega">Fecha de entrega:</label>
-      <input
-        type="date"
-        id="fecha_entrega"
-        name="fecha_entrega"
-        [(ngModel)]="nuevaTarea.fecha_entrega"
-        required
-        #fecha="ngModel"
-        [class.is-invalid]="fecha.invalid && (fecha.dirty || fecha.touched)">
-      <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)" class="invalid-feedback">
-        La fecha de entrega es requerida
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="hora_entrega">Hora de entrega:</label>
-      <input
-        type="time"
-        id="hora_entrega"
-        name="hora_entrega"
-        [(ngModel)]="nuevaTarea.hora_entrega"
-        required
-        #hora="ngModel"
-        [class.is-invalid]="hora.invalid && (hora.dirty || hora.touched)">
-      <div *ngIf="hora.invalid && (hora.dirty || hora.touched)" class="invalid-feedback">
-        La hora de entrega es requerida
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="estado">Estado:</label>
-      <select
-        id="estado"
-        name="estado"
-        [(ngModel)]="nuevaTarea.estado"
-        required
-        #estado="ngModel">
-        <option value="pendiente">Pendiente</option>
-        <option value="en_progreso">En progreso</option>
-        <option value="terminada">Terminada</option>
-      </select>
-    </div>
-
-    <div class="form-actions">
-      <button type="submit" [disabled]="!tareaForm.form.valid || isLoading" [class.loading]="isLoading">
-        <span *ngIf="!isLoading">Agregar Tarea</span>
-        <span *ngIf="isLoading">Procesando...</span>
-      </button>
-
-      <div *ngIf="submitSuccess" class="alert alert-success">
-        ¡Tarea creada exitosamente!
-      </div>
-    </div>
-  </form>
-</div>
 
