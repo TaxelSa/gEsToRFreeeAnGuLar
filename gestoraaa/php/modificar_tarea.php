@@ -1,5 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: http://localhost:5173'); // Cambia esto al origen de tu frontend
+header('Access-Control-Allow-Origin: *'); // o más seguro:
+# header('Access-Control-Allow-Origin: http://localhost:4200');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
@@ -47,13 +48,13 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "UPDATE tarea SET 
-                nombre_tarea = :nombre_tarea, 
-                descripcion = :descripcion, 
-                fecha_entrega = :fecha_entrega, 
-                hora_entrega = :hora_entrega, 
-                prioridad = :prioridad, 
-                id_estado = :id_estado 
+    $sql = "UPDATE tarea SET
+                nombre_tarea = :nombre_tarea,
+                descripcion = :descripcion,
+                fecha_entrega = :fecha_entrega,
+                hora_entrega = :hora_entrega,
+                prioridad = :prioridad,
+                id_estado = :id_estado
             WHERE id_tarea = :id_tarea";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id_tarea', $id_tarea, PDO::PARAM_INT);

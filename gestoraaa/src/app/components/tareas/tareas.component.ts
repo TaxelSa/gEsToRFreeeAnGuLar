@@ -8,18 +8,20 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ApiService } from '../../services/api.service';
 import { Tarea } from '../../models/tarea.model';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tareas',
   standalone: true,
-  imports: [CommonModule, DragDropModule],
-  templateUrl: './tareas.component.html',
+ imports: [CommonModule, DragDropModule, FormsModule],  templateUrl: './tareas.component.html',
   styleUrls: ['./tareas.component.css'],
 })
 export class TareasComponent implements OnInit {
   tareasCol1: Tarea[] = [];
   tareasCol2: Tarea[] = [];
   tareasCol3: Tarea[] = [];
+
+  tareaEnEdicion: Tarea | null = null; // NUEVO: para manejar la tarea que se edita
 
   constructor(private apiService: ApiService) {}
 
@@ -29,12 +31,10 @@ export class TareasComponent implements OnInit {
 
   cargarTareas() {
     this.apiService.obtenerTareas().subscribe((tareas: Tarea[]) => {
-      // Limpiar las columnas
       this.tareasCol1 = [];
       this.tareasCol2 = [];
       this.tareasCol3 = [];
 
-      // Repartir tareas entre las 3 columnas
       tareas.forEach((tarea, index) => {
         if (index % 3 === 0) this.tareasCol1.push(tarea);
         else if (index % 3 === 1) this.tareasCol2.push(tarea);
@@ -56,15 +56,21 @@ export class TareasComponent implements OnInit {
     }
   }
 
-
   editarTarea(tarea: Tarea) {
-    const nuevoNombre = prompt('Modificar nombre de la tarea:', tarea.nombre_tarea);
-    if (nuevoNombre !== null && nuevoNombre.trim() !== '') {
-      const tareaEditada = { ...tarea, nombre_tarea: nuevoNombre.trim() };
-      this.apiService.actualizarTarea(tareaEditada).subscribe(() => {
+    this.tareaEnEdicion = { ...tarea }; // NUEVO: habilita la edición en línea
+  }
+
+  guardarCambios() {
+    if (this.tareaEnEdicion) {
+      this.apiService.actualizarTarea(this.tareaEnEdicion).subscribe(() => {
+        this.tareaEnEdicion = null;
         this.cargarTareas();
       });
     }
+  }
+
+  cancelarEdicion() {
+    this.tareaEnEdicion = null; // NUEVO: cancela la edición
   }
 
   eliminarTarea(tarea: Tarea) {

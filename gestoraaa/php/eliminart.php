@@ -31,22 +31,19 @@ try {
     exit;
 }
 
-// Leer datos JSON del cuerpo de la solicitud DELETE
-$data = json_decode(file_get_contents("php://input"), true);
-
-if (!isset($data['id_tarea'])) {
+if (!isset($_GET['id_tarea'])) {
     http_response_code(400);
     echo json_encode([
         'status' => 'error',
-        'message' => 'El campo id_tarea es requerido'
+        'message' => 'El campo id_tarea es requerido en la URL'
     ]);
     exit;
 }
 
-$id_tarea = (int)$data['id_tarea'];
+$id_tarea = (int)$_GET['id_tarea'];
 
 // Verificar si la tarea existe
-$stmt = $pdo->prepare("SELECT COUNT(*) FROM tareas WHERE id_tarea = :id_tarea");
+$stmt = $pdo->prepare("SELECT COUNT(*) FROM tarea WHERE id_tarea = :id_tarea");
 $stmt->bindParam(':id_tarea', $id_tarea, PDO::PARAM_INT);
 $stmt->execute();
 
@@ -60,7 +57,7 @@ if ($stmt->fetchColumn() == 0) {
 }
 
 // Ejecutar la eliminación
-$stmt = $pdo->prepare("DELETE FROM tareas WHERE id_tarea = :id_tarea");
+$stmt = $pdo->prepare("DELETE FROM tarea WHERE id_tarea = :id_tarea");
 $stmt->bindParam(':id_tarea', $id_tarea, PDO::PARAM_INT);
 
 try {
