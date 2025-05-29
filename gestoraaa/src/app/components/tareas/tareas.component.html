@@ -9,9 +9,17 @@
   >
     <h2>Columna 1</h2>
     <div class="tarea" *ngFor="let tarea of tareasCol1" cdkDrag>
-      {{ tarea.nombre_tarea }}
-      <button (click)="editarTarea(tarea)">Modificar</button>
-      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+      <ng-container *ngIf="tareaEnEdicion?.id_tarea !== tarea.id_tarea">
+        {{ tarea.nombre_tarea }}
+        <button (click)="editarTarea(tarea)">Modificar</button>
+        <button (click)="eliminarTarea(tarea)">Eliminar</button>
+      </ng-container>
+
+      <ng-container *ngIf="tareaEnEdicion?.id_tarea === tarea.id_tarea">
+<input [(ngModel)]="tareaEnEdicion!.nombre_tarea" />
+        <button (click)="guardarCambios()">Guardar</button>
+        <button (click)="cancelarEdicion()">Cancelar</button>
+      </ng-container>
     </div>
   </div>
 
@@ -25,9 +33,17 @@
   >
     <h2>Columna 2</h2>
     <div class="tarea" *ngFor="let tarea of tareasCol2" cdkDrag>
-      {{ tarea.nombre_tarea }}
-      <button (click)="editarTarea(tarea)">Modificar</button>
-      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+      <ng-container *ngIf="tareaEnEdicion?.id_tarea !== tarea.id_tarea">
+        {{ tarea.nombre_tarea }}
+        <button (click)="editarTarea(tarea)">Modificar</button>
+        <button (click)="eliminarTarea(tarea)">Eliminar</button>
+      </ng-container>
+
+      <ng-container *ngIf="tareaEnEdicion?.id_tarea === tarea.id_tarea">
+<input [(ngModel)]="tareaEnEdicion!.nombre_tarea" />
+        <button (click)="guardarCambios()">Guardar</button>
+        <button (click)="cancelarEdicion()">Cancelar</button>
+      </ng-container>
     </div>
   </div>
 
@@ -41,9 +57,19 @@
   >
     <h2>Columna 3</h2>
     <div class="tarea" *ngFor="let tarea of tareasCol3" cdkDrag>
-      {{ tarea.nombre_tarea }}
-      <button (click)="editarTarea(tarea)">Modificar</button>
-      <button (click)="eliminarTarea(tarea)">Eliminar</button>
+      <ng-container *ngIf="tareaEnEdicion?.id_tarea !== tarea.id_tarea">
+        {{ tarea.nombre_tarea }}
+        <button (click)="editarTarea(tarea)">Modificar</button>
+        <button (click)="eliminarTarea(tarea)">Eliminar</button>
+      </ng-container>
+
+      <ng-container *ngIf="tareaEnEdicion?.id_tarea === tarea.id_tarea">
+<input [(ngModel)]="tareaEnEdicion!.nombre_tarea" />
+        <button (click)="guardarCambios()">Guardar</button>
+        <button (click)="cancelarEdicion()">Cancelar</button>
+      </ng-container>
     </div>
   </div>
 </div>
+
+

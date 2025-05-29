@@ -1,6 +1,6 @@
 // src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Proyecto } from '../models/proyecto.model';
 import { Observable } from 'rxjs';
@@ -67,8 +67,13 @@ export class ApiService {
 
 
 actualizarTarea(tarea: Tarea): Observable<any> {
-  // Si usas POST para actualizar, como en actualizarEstadoTarea, o PUT si tu backend lo soporta
-  return this.httpClient.post(`${this.PHP_API_SERVER}/modificar_tarea.php`, tarea);
+  const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  return this.httpClient.post(
+    `${this.PHP_API_SERVER}/modificar_tarea.php`,
+    JSON.stringify(tarea),
+    { headers }
+  );
 }
 
 eliminarTarea(id_tarea: number): Observable<any> {
